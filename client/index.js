@@ -29,13 +29,22 @@ function get_students() {
 }
 
 
-//how to connect this and the form
-function addProducts() {
+//adds a new course 
+function add() {
+    var name = document.getElementById("name")
+    var description = document.getElementById("description")
+    var image = document.getElementById("image")
+    console.log(description.value)
     $.ajax({
         url: "http://localhost/ProjectSchool/api/index.php?controller=products&action=add",
         method: "POST",
+        data: { name: name.value, description: description.value, image: image.value },
         success: function (res) {
+            console.log(res) // gets us id
             draw(JSON.parse(res));
+            //need to send the id and top print by id
+            //need to do more ajax to draw by id
+            //make an ajax of select all from course where id = id from  res
         },
         error: function (res) {
             alert(JSON.stringify(res));
@@ -45,19 +54,54 @@ function addProducts() {
 }
 
 
-function delProducts() {
+
+
+//adds a new student
+function addstud() {
+    var name = document.getElementById("name")
+    var password = document.getElementById("password")
+    var email = document.getElementById("email")
+    console.log(password.value)
+    $.ajax({
+        url: "http://localhost/ProjectSchool/api/index.php?controller=products&action=addstu",
+        method: "POST",
+        data: { name: name.value, password: password.value, email: email.value },
+        success: function (res) {
+            console.log(res) // gets us id
+            draw(JSON.parse(res));
+            //need to send the id and top print by id
+            //need to do more ajax to draw by id
+            //make an ajax of select all from course where id = id from  res
+        },
+        error: function (res) {
+            alert(JSON.stringify(res));
+        }
+
+    })
+}
+
+
+
+function delProducts(id, callback) {
     $.ajax({
         url: "http://localhost/ProjectSchool/api/index.php?controller=products&action=delete",
         method: "POST",
+        data: {
+            'id': id
+        },
         success: function (res) {
-            draw(JSON.parse(res));
+            console.log(res);
+
         },
         error: function (res) {
-            alert(JSON.stringify(res));
+
         }
 
     })
 }
+
+
+
 
 
 var DOM = {}; //courselist
@@ -85,7 +129,7 @@ function ProductCard(p) {
 
     card.querySelector("#title").innerHTML = p.courseName;
     // card.querySelector("#price").innerHTML = "description:" + p.description;
-    
+
     return card;
 }
 
@@ -103,22 +147,52 @@ function ProductCards(p) {
     card.style.display = "block";
 
     card.querySelector("#title").innerHTML = p.userName;
-    // card.querySelector("#price").innerHTML = "description:" + p.description;
-    
+    //card.querySelector("#price").innerHTML = "description:" + p.description;
+
     return card;
 }
 
 
 
-function additem(){
-    
-var mainbox = document.getElementById("maincon")
-var addbox = document.getElementById("additem")
+function additem() {
 
- mainbox.innerHTML = addbox.innerHTML;
- 
+    var mainbox = document.getElementById("maincon")
+    var addbox = document.getElementById("additem")
+
+    mainbox.innerHTML = addbox.innerHTML;
+
 }
 
+
+function addstu() {
+
+    var mainbox = document.getElementById("maincon")
+    var addboxstu = document.getElementById("addstu")
+
+    mainbox.innerHTML = addboxstu.innerHTML;
+
+}
+
+
+
+
+function info() {
+
+    var mainbox = document.getElementById("maincon")
+    var infobox = document.getElementById("information")
+    
+
+
+
+    mainbox.innerHTML = infobox.innerHTML;
+
+}
+
+
+
+// function delProducts(){
+
+// }
 
 init();
 

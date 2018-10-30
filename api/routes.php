@@ -1,6 +1,6 @@
 <?php
 //$controller = somthing and $action = somthing
-$controllers = array( "products" => ["products" ,"students", "add" , "delete"] , "cart"=>["add_product","get_cart"]);
+$controllers = array( "products" => ["products" ,"students", "add" ,"addstu", "delete"] , "cart"=>["add_product","get_cart"]);
 
 if(array_key_exists($controller,$controllers)){ //do we have such controller
     if(in_array($action,$controllers[$controller])){ //do we have such action
